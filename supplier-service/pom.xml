@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>product-service</artifactId>
+    <artifactId>supplier-service</artifactId>
     <version>${revision}</version>
     <packaging>jar</packaging>
 </project>
