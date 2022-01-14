@@ -3,26 +3,23 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>order-service</artifactId>
+        <artifactId>product-service</artifactId>
         <groupId>com.mycompany.app</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>order-service-impl</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <artifactId>product-service-api</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.mycompany.app</groupId>
-            <artifactId>order-service-domain</artifactId>
+            <artifactId>product-service-impl</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
         <dependency>
             <groupId>com.mycompany.app</groupId>
-            <artifactId>order-service-db</artifactId>
+            <artifactId>product-service-domain</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

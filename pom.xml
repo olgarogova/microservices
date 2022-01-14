@@ -21,9 +21,9 @@
 	</properties>
 
 	<modules>
+		<module>customer-service</module>
 		<module>order-service</module>
 		<module>product-service</module>
-		<module>customer-service</module>
 		<module>supplier-service</module>
 	</modules>
 
