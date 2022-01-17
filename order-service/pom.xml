@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <modules>
-        <module>product-service-domain</module>
-        <module>product-service-impl</module>
-        <module>product-service-api</module>
-        <module>product-service-db</module>
+        <module>order-service-domain</module>
+        <module>order-service-impl</module>
+        <module>order-service-api</module>
+        <module>order-service-db</module>
     </modules>
 
     <parent>
@@ -15,7 +15,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>product-service</artifactId>
+    <artifactId>order-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
