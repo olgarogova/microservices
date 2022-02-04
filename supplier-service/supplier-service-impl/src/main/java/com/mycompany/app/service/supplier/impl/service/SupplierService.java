@@ -9,5 +9,6 @@ public interface SupplierService {
     SupplierEntity getSupplierById(int supplierId);
     SupplierEntity createSupplier(SupplierEntity supplierEntity);
     SupplierEntity updateSupplier(int supplierId, SupplierEntity updatedSupplierEntity);
+    void addProductsFromSupplier(int supplierId);
     void deleteSupplier(int supplierId);
 }

@@ -54,6 +54,11 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
+    public void addProductsFromSupplier(int supplierId) {
+        StubProductService.addProducts();
+    }
+
+    @Override
     public void deleteSupplier(int supplierId) {
         try {
             supplierRepository.deleteById(supplierId);

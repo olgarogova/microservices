@@ -15,6 +15,9 @@
             <column name="total_amount" type="numeric">
                 <constraints nullable="false"/>
             </column>
+            <column name="order_status" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
     <changeSet author="Olga_Rogova (generated)" id="1637150338351-12">

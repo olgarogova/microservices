@@ -1,6 +1,7 @@
 package com.mycompany.app.service.order.impl;
 
 import com.mycompany.app.service.order.domain.entity.OrderEntity;
+import com.mycompany.app.service.order.domain.entity.OrderStatus;
 import com.mycompany.app.service.order.impl.exceptions.ResourceNotFoundException;
 import com.mycompany.app.service.order.domain.repository.OrderRepository;
 import com.mycompany.app.service.order.impl.service.OrderService;
@@ -41,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderEntity createOrder(OrderEntity orderEntity) {
         return orderRepository
-                    .save(new OrderEntity(orderEntity.getOrderNumber(), orderEntity.getOrderDate(), orderEntity.getTotalAmount()));
+                    .save(new OrderEntity(orderEntity.getOrderNumber(), orderEntity.getOrderDate(), orderEntity.getTotalAmount(), orderEntity.getOrderStatus()));
     }
 
     @Override
@@ -50,8 +51,16 @@ public class OrderServiceImpl implements OrderService {
         orderData.setOrderNumber(updatedOrderEntity.getOrderNumber());
         orderData.setOrderDate(updatedOrderEntity.getOrderDate());
         orderData.setTotalAmount(updatedOrderEntity.getTotalAmount());
+        orderData.setOrderStatus(updatedOrderEntity.getOrderStatus());
         orderRepository.save(orderData);
         return orderData;
+    }
+
+    @Override
+    public OrderEntity paidOrder (int orderId, OrderEntity orderEntity){
+        StubProductService.reserveProducts(orderEntity);
+        orderEntity.setOrderStatus(OrderStatus.PAYED);
+        return orderEntity;
     }
 
     @Override

@@ -49,6 +49,12 @@ public class OrderRestController {
         return orderService.updateOrder(orderId, updatedOrderEntity);
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/paid/{orderId}")
+    public OrderEntity paidOrder(@PathVariable("orderId") int orderId, @RequestBody OrderEntity orderEntity){
+        return orderService.paidOrder(orderId, orderEntity);
+    }
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{orderId}")
     public void deleteOrder(@PathVariable("orderId") int orderId) {
