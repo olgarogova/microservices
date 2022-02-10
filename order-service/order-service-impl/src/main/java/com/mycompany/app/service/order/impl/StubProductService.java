@@ -8,11 +8,11 @@ public class StubProductService {
 
     static final Logger logger = LoggerFactory.getLogger(StubProductService.class);
 
-    public static void reserveProducts (OrderEntity order){
+    public void reserveProducts (OrderEntity order){
         logger.info("Add to order " + order + " products from Products, delete products from Products");
     }
 
-    public static void releaseProducts (OrderEntity order){
+    public void releaseProducts (OrderEntity order){
         logger.info("Delete from order " + order + " products from Products, add products to Products");
     }
 }

@@ -14,10 +14,12 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
+    private final StubProductService stubProductService;
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, StubProductService stubProductService) {
         this.orderRepository = orderRepository;
+        this.stubProductService = stubProductService;
     }
 
     @Override
@@ -58,7 +60,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderEntity paidOrder (int orderId, OrderEntity orderEntity){
-        StubProductService.reserveProducts(orderEntity);
+        stubProductService.reserveProducts(orderEntity);
         orderEntity.setOrderStatus(OrderStatus.PAYED);
         return orderEntity;
     }

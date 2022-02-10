@@ -13,10 +13,12 @@ import java.util.List;
 @Service
 public class SupplierServiceImpl implements SupplierService {
     private final SupplierRepository supplierRepository;
+    private final StubProductService stubProductService;
 
     @Autowired
-    public SupplierServiceImpl(SupplierRepository supplierRepository) {
+    public SupplierServiceImpl(SupplierRepository supplierRepository, StubProductService stubProductService) {
         this.supplierRepository = supplierRepository;
+        this.stubProductService = stubProductService;
     }
 
     @Override
@@ -55,7 +57,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public void addProductsFromSupplier(int supplierId) {
-        StubProductService.addProducts();
+        stubProductService.addProducts();
     }
 
     @Override

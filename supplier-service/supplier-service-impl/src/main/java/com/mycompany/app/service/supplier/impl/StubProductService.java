@@ -7,11 +7,11 @@ public class StubProductService {
 
     static final Logger logger = LoggerFactory.getLogger(StubProductService.class);
 
-    public static void addProducts (){
+    public void addProducts (){
         logger.info("Add products to Products");
     }
 
-    public static void deleteProducts (){
+    public void deleteProducts (){
         logger.info("Add products to Products");
     }
 }

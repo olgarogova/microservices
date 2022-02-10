@@ -19,7 +19,6 @@
             <artifactId>supplier-service-domain</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
         <dependency>
             <groupId>com.mycompany.app</groupId>
             <artifactId>supplier-service-db</artifactId>
