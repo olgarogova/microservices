@@ -44,6 +44,12 @@ public class SupplierRestController {
         return supplierService.createSupplier(supplierEntity);
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/add-products/{supplierId}")
+    public void addProductsFromSupplier(@PathVariable("supplierId") int supplierId){
+        supplierService.addProductsFromSupplier(supplierId);
+    }
+
     @PutMapping("/{supplierId}")
     public SupplierEntity updateSupplier(@PathVariable("supplierId") int supplierId, @RequestBody SupplierEntity updatedSupplierEntity) {
         return supplierService.updateSupplier(supplierId, updatedSupplierEntity);

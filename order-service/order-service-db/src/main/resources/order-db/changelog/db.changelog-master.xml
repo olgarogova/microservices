@@ -20,4 +20,5 @@
     <changeSet author="Olga_Rogova (generated)" id="1637150338351-12">
         <createSequence cacheSize="1" cycle="false" dataType="bigint" incrementBy="1" maxValue="9223372036854775807" minValue="1" sequenceName="hibernate_sequence" startValue="1"/>
     </changeSet>
+    <include file="order-db/changelog/db.add_order_status.xml"/>
 </databaseChangeLog>

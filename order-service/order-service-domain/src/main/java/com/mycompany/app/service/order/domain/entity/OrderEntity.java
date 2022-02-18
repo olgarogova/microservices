@@ -2,6 +2,8 @@ package com.mycompany.app.service.order.domain.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,13 +31,18 @@ public class OrderEntity {
     @Column(name = "total_amount")
     private BigDecimal totalAmount;
 
+    @Column(name = "order_status")
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
+
     public OrderEntity() {
     }
 
-    public OrderEntity(String orderNumber, Date orderDate, BigDecimal totalAmount) {
+    public OrderEntity(String orderNumber, Date orderDate, BigDecimal totalAmount, OrderStatus orderStatus) {
         this.orderNumber = orderNumber;
         this.orderDate = orderDate;
         this.totalAmount = totalAmount;
+        this.orderStatus = orderStatus;
     }
 
     public int getOrderId() {
@@ -68,6 +75,14 @@ public class OrderEntity {
 
     public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     @Override

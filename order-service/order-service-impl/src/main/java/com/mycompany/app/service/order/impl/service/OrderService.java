@@ -9,5 +9,6 @@ public interface OrderService {
     OrderEntity getOrderById(int orderId);
     OrderEntity createOrder(OrderEntity orderEntity);
     OrderEntity updateOrder(int orderId, OrderEntity updatedOrderEntity);
+    OrderEntity paidOrder(int orderId, OrderEntity orderEntity);
     void deleteOrder(int orderId);
 }
