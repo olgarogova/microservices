@@ -19,6 +19,9 @@ public class ProductEntity {
     @Column(name = "product_name")
     private String productName;
 
+    @Column(name = "supplier_id")
+    private int supplierId;
+
     @Column(name = "unit_price")
     private BigDecimal unitPrice;
 
@@ -28,8 +31,9 @@ public class ProductEntity {
     public ProductEntity() {
     }
 
-    public ProductEntity(String productName, BigDecimal unitPrice, boolean isDiscontinued) {
+    public ProductEntity(String productName, int supplierId, BigDecimal unitPrice, boolean isDiscontinued) {
         this.productName = productName;
+        this.supplierId = supplierId;
         this.unitPrice = unitPrice;
         this.isDiscontinued = isDiscontinued;
     }
@@ -66,11 +70,20 @@ public class ProductEntity {
         isDiscontinued = discontinued;
     }
 
+    public int getSupplierId() {
+        return supplierId;
+    }
+
+    public void setSupplierId(int supplierId) {
+        this.supplierId = supplierId;
+    }
+
     @Override
     public String toString() {
         return "Product {" +
                 "productId = " + productId +
                 ", productName = '" + productName + '\'' +
+                ", supplierId = '" + supplierId +
                 ", unitPrice = " + unitPrice +
                 ", isDiscontinued = " + isDiscontinued +
                 '}';

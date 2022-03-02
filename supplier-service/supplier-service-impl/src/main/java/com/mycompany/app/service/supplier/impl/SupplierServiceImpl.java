@@ -1,6 +1,8 @@
 package com.mycompany.app.service.supplier.impl;
 
+import com.mycompany.app.service.supplier.impl.openfeign.ProductServiceClient;
 import com.mycompany.app.service.supplier.domain.entity.SupplierEntity;
+import com.mycompany.app.service.supplier.domain.dto.ProductDto;
 import com.mycompany.app.service.supplier.impl.exceptions.ResourceNotFoundException;
 import com.mycompany.app.service.supplier.impl.service.SupplierService;
 import com.mycompany.app.service.supplier.domain.repository.SupplierRepository;
@@ -13,12 +15,12 @@ import java.util.List;
 @Service
 public class SupplierServiceImpl implements SupplierService {
     private final SupplierRepository supplierRepository;
-    private final StubProductService stubProductService;
+    private final ProductServiceClient productServiceClient;
 
     @Autowired
-    public SupplierServiceImpl(SupplierRepository supplierRepository, StubProductService stubProductService) {
+    public SupplierServiceImpl(SupplierRepository supplierRepository, ProductServiceClient productServiceClient) {
         this.supplierRepository = supplierRepository;
-        this.stubProductService = stubProductService;
+        this.productServiceClient = productServiceClient;
     }
 
     @Override
@@ -56,8 +58,10 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public void addProductsFromSupplier(int supplierId) {
-        stubProductService.addProducts();
+    public void addProductsFromSupplier(int supplierId, List<ProductDto> productDtos) {
+        for(ProductDto productDto: productDtos) {
+            productServiceClient.createProduct(productDto);
+        }
     }
 
     @Override

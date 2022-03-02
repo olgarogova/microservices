@@ -11,17 +11,4 @@
 
     <artifactId>customer-service-api</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.mycompany.app</groupId>
-            <artifactId>customer-service-impl</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.mycompany.app</groupId>
-            <artifactId>customer-service-domain</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
-
 </project>
