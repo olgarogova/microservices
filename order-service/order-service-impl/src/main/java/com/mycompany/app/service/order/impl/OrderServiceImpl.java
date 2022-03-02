@@ -1,10 +1,16 @@
 package com.mycompany.app.service.order.impl;
 
+import com.mycompany.app.service.order.domain.dto.CustomerDto;
 import com.mycompany.app.service.order.domain.entity.OrderEntity;
 import com.mycompany.app.service.order.domain.entity.OrderStatus;
+import com.mycompany.app.service.order.domain.dto.ProductDto;
 import com.mycompany.app.service.order.impl.exceptions.ResourceNotFoundException;
 import com.mycompany.app.service.order.domain.repository.OrderRepository;
+import com.mycompany.app.service.order.impl.openfeign.CustomerServiceClient;
+import com.mycompany.app.service.order.impl.openfeign.ProductServiceClient;
 import com.mycompany.app.service.order.impl.service.OrderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +20,16 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
-    private final StubProductService stubProductService;
+    private final ProductServiceClient productServiceClient;
+    private final CustomerServiceClient customerServiceClient;
+
+    static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, StubProductService stubProductService) {
+    public OrderServiceImpl(OrderRepository orderRepository, ProductServiceClient productServiceClient, CustomerServiceClient customerServiceClient) {
         this.orderRepository = orderRepository;
-        this.stubProductService = stubProductService;
+        this.productServiceClient = productServiceClient;
+        this.customerServiceClient = customerServiceClient;
     }
 
     @Override
@@ -42,9 +52,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderEntity createOrder(OrderEntity orderEntity) {
+    public OrderEntity createOrder(OrderEntity orderEntity, int customerId) {
+        customerServiceClient.getCustomerById(customerId);
         return orderRepository
-                    .save(new OrderEntity(orderEntity.getOrderNumber(), orderEntity.getOrderDate(), orderEntity.getTotalAmount(), orderEntity.getOrderStatus()));
+                .save(new OrderEntity(orderEntity.getOrderNumber(), orderEntity.getOrderDate(), orderEntity.getCustomerId(), orderEntity.getTotalAmount(), orderEntity.getOrderStatus()));
+
     }
 
     @Override
@@ -52,6 +64,7 @@ public class OrderServiceImpl implements OrderService {
         OrderEntity orderData = orderRepository.findById(orderId).orElseThrow(() -> new ResourceNotFoundException("Order not found"));
         orderData.setOrderNumber(updatedOrderEntity.getOrderNumber());
         orderData.setOrderDate(updatedOrderEntity.getOrderDate());
+        orderData.setCustomerId(updatedOrderEntity.getCustomerId());
         orderData.setTotalAmount(updatedOrderEntity.getTotalAmount());
         orderData.setOrderStatus(updatedOrderEntity.getOrderStatus());
         orderRepository.save(orderData);
@@ -59,9 +72,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderEntity paidOrder (int orderId, OrderEntity orderEntity){
-        stubProductService.reserveProducts(orderEntity);
+    public OrderEntity paidOrder (int orderId, List<ProductDto> productDtos){
+        OrderEntity orderEntity = orderRepository.findById(orderId).orElseThrow(() -> new ResourceNotFoundException("Order not found"));
+        for(ProductDto productDto: productDtos) {
+            productServiceClient.deleteProduct(productDto.getProductId());
+        }
         orderEntity.setOrderStatus(OrderStatus.PAYED);
+        orderRepository.save(orderEntity);
         return orderEntity;
     }
 

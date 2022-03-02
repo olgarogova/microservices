@@ -28,6 +28,9 @@ public class OrderEntity {
     @Column(name = "order_date")
     private Date orderDate;
 
+    @Column(name = "customer_id")
+    private int customerId;
+
     @Column(name = "total_amount")
     private BigDecimal totalAmount;
 
@@ -38,9 +41,10 @@ public class OrderEntity {
     public OrderEntity() {
     }
 
-    public OrderEntity(String orderNumber, Date orderDate, BigDecimal totalAmount, OrderStatus orderStatus) {
+    public OrderEntity(String orderNumber, Date orderDate, int customerId, BigDecimal totalAmount, OrderStatus orderStatus) {
         this.orderNumber = orderNumber;
         this.orderDate = orderDate;
+        this.customerId = customerId;
         this.totalAmount = totalAmount;
         this.orderStatus = orderStatus;
     }
@@ -69,6 +73,14 @@ public class OrderEntity {
         this.orderDate = orderDate;
     }
 
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
     public BigDecimal getTotalAmount() {
         return totalAmount;
     }
@@ -90,6 +102,7 @@ public class OrderEntity {
         return "Order {" +
                 "orderId = " + orderId +
                 ", orderNumber = '" + orderNumber + '\'' +
+                ", customerId = '" + customerId +
                 ", orderDate = " + orderDate +
                 ", totalAmount = " + totalAmount +
                 '}';
